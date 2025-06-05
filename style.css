@@ -1,0 +1,63 @@
+body{
+    background-color: #a9a9a9;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#Hd{
+    text-align: center;
+}
+
+#kap{
+    width: 50%;
+    border-radius: 10px;
+    background-color: aliceblue;
+    padding: 1px;
+    text-align: center;
+}
+
+#kap h3{
+    font-size: 20px;
+    color: #333;
+    border-bottom: 3px solid #000000;
+    display: inline-block;
+}
+#Kaplist{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+#kap1{
+    
+    text-decoration: none;
+    color: red;
+}
+
+.return-home-btn {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    background: #222;
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    padding: 10px 22px;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+    z-index: 1000;
+}
+.return-home-btn:hover {
+    background: #c00;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(200,0,0,0.18);
+    transform: translateY(-2px) scale(1.04);
+}
