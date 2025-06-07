@@ -1,3 +1,4 @@
+/* === 1. GRUNDLÄGGANDE SIDLAYOUT === */
 body{
     background-color: #a9a9a9;
     font-family: Arial, sans-serif;
@@ -14,12 +15,53 @@ body{
     text-align: center;
 }
 
-#kap{
+/* === 2. BESKRIVNINGSSEKTION === */
+#desc {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+
+#desc h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    text-align: center;
+}
+
+#desc p {
+    line-height: 1.6;
+    margin-bottom: 1.2em;
+    color: #444;
+}
+
+#desc em {
+    font-style: italic;
+    color: #222;
+}
+
+
+.hidden {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+#descContent {  /* Changed from #content */
+    transition: all 0.3s ease-in-out;
+}
+
+/* === 3. KAPITELSEKTION === */
+#kap {
     width: 50%;
     border-radius: 10px;
     background-color: aliceblue;
     padding: 1px;
     text-align: center;
+    justify-content: center;
 }
 
 #kap h3{
@@ -39,37 +81,8 @@ body{
     align-items: center;
 
 }
-#kap{
-    width: 25%;
-    justify-content: center;
-    
-}
 
-
-
-.return-home-btn {
-    position: fixed;
-    top: 24px;
-    left: 24px;
-    background: #222;
-    color: #fff;
-    border: none;
-    border-radius: 24px;
-    padding: 10px 22px;
-    font-size: 1rem;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
-    z-index: 1000;
-    
-}
-.return-home-btn:hover {
-    background: #c00;
-    color: #fff;
-    box-shadow: 0 4px 16px rgba(200,0,0,0.18);
-    transform: translateY(-2px) scale(1.04);
-}
-
+/* === 4. KAPITELGRID LAYOUT === */
 .kapitel-columns {
     display: flex;
     justify-content: center;
@@ -87,47 +100,27 @@ body{
     padding-bottom: 40px;
 }
 
-.contact-footer {
-    margin-top: 40px;
+/* === 5. KAPITELKNAPPAR === */
+.kapitel-link { 
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border: 2px solid #00ff3c;
+    border-radius: 5px;
+    color: #333;
+    text-decoration: none;
+    margin: 5px;
+    min-width: 120px;
     text-align: center;
-    opacity: 0.85;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-.a{
-    display: inline-block;
-    cursor: pointer;
-}
-.button{
-    display: inline-block;
-    text-align: center;
-    cursor: pointer;
-}
-.kapitel-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 30px;
-    text-decoration: none;
-    background: rgba(164, 164, 164, 0.373);
-    border: 2px solid rgb(35, 165, 35);
-    border-radius: 3px;
-    padding: 8px 30px;  /* Increased horizontal padding */
-    font-size: inherit;
-    color: #222 !important;
-    box-sizing: border-box;
-    box-shadow: none;
-    transition: background 0.2s, border 0.2s, color 0.2s, transform 0.1s, min-height 0.2s;
-    position: relative;
-    overflow: visible;
-    width: 140px;      /* Set fixed width */
-    min-width: 140px;  /* Ensure minimum width */
-    text-align: center;
-    word-break: keep-all;  /* Prevent text wrapping */
-    white-space: nowrap;   /* Keep text on single line */
-    min-height: 2.5em;
-    font-weight: 500;
-    letter-spacing: 0.01em;
-    cursor: pointer;
+.kapitel-link:hover {
+    background-color: #d2cece;
+    color: rgb(0, 0, 0) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .kapitel-link .kapitel-idle {
@@ -144,6 +137,22 @@ body{
     height: 100%;
 }
 
+.chapter-read {
+    border-color: #666 !important;
+    background-color: #e0e0e0;
+    position: relative;
+}
+
+.chapter-read::after {
+    content: "✓";
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    font-size: 0.8em;
+    color: #666;
+}
+
+/* === 6. TOOLTIP SYSTEM === */
 #tooltip-overlay {
     position: fixed;
     left: 0;
@@ -188,10 +197,69 @@ body{
     color: #222 !important;
 }
 
+/* === 7. NAVIGATION OCH KNAPPAR === */
+.return-home-btn {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    background: #222;
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    padding: 10px 22px;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+    z-index: 1000;
+    
+}
+.return-home-btn:hover {
+    background: #c00;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(200,0,0,0.18);
+    transform: translateY(-2px) scale(1.04);
+}
+
+/* === 8. FOOTER OCH LÄNKAR === */
+.contact-footer {
+    margin-top: 40px;
+    text-align: center;
+    opacity: 0.85;
+}
+
+.a{
+    display: inline-block;
+    cursor: pointer;
+}
+.button{
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    
+}
+
 a:link{
     text-decoration: none;
 }
 .a:hover {
     color: #000;
     text-decoration: underline;
+}
+
+/* === RESET KNAPP STILAR === */
+.reset-btn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.reset-btn:hover {
+    background: #cc0000;
+    transform: translateY(-1px);
 }
