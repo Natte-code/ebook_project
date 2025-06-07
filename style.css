@@ -7,6 +7,7 @@ body{
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    overflow: visible; /* Allow tooltip to overflow */
 }
 
 #Hd{
@@ -44,11 +45,7 @@ body{
     
 }
 
-#kap1{
-    
-    text-decoration: none;
-    color: red;
-}
+
 
 .return-home-btn {
     position: fixed;
@@ -64,6 +61,7 @@ body{
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
     z-index: 1000;
+    
 }
 .return-home-btn:hover {
     background: #c00;
@@ -75,13 +73,125 @@ body{
 .kapitel-columns {
     display: flex;
     justify-content: center;
-    gap: 32px; /* space between columns */
+    gap: 32px;
     width: 100%;
+    max-width: 600px;
 }
 
 .kapitel-column {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    width: 50%;
+    min-width: 0;
+    padding-bottom: 40px;
 }
 
+.contact-footer {
+    margin-top: 40px;
+    text-align: center;
+    opacity: 0.85;
+}
+
+.a{
+    display: inline-block;
+    cursor: pointer;
+}
+.button{
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+}
+.kapitel-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    text-decoration: none;
+    background: rgba(164, 164, 164, 0.373);
+    border: 2px solid rgb(35, 165, 35);
+    border-radius: 3px;
+    padding: 8px 30px;  /* Increased horizontal padding */
+    font-size: inherit;
+    color: #222 !important;
+    box-sizing: border-box;
+    box-shadow: none;
+    transition: background 0.2s, border 0.2s, color 0.2s, transform 0.1s, min-height 0.2s;
+    position: relative;
+    overflow: visible;
+    width: 140px;      /* Set fixed width */
+    min-width: 140px;  /* Ensure minimum width */
+    text-align: center;
+    word-break: keep-all;  /* Prevent text wrapping */
+    white-space: nowrap;   /* Keep text on single line */
+    min-height: 2.5em;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+}
+
+.kapitel-link .kapitel-idle {
+    width: 100%;
+    text-align: center;
+    transition: color 0.2s;
+    z-index: 1;
+    position: relative;
+    font-weight: 500;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+#tooltip-overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 10000;
+}
+
+.chapter-tooltip {
+    background: #222;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 1.05em;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    opacity: 0;
+    transition: all 0.2s ease;
+    min-height: 2.5em;
+    font-weight: 600;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.tooltip-visible {
+    opacity: 1;
+}
+
+.kapitel-link:hover ~ #tooltip-overlay .chapter-tooltip,
+.kapitel-link:focus ~ #tooltip-overlay .chapter-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+.kapitel-link:visited {
+    color: #222 !important;
+}
+
+a:link{
+    text-decoration: none;
+}
+.a:hover {
+    color: #000;
+    text-decoration: underline;
+}
