@@ -1,37 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RÖDA GRÄNSER Ebook</title>
+    <meta name="description" content="Röda gränser – en roman om krig, brödraskap och överlevnad. Läs hela boken gratis online.">
+    <meta property="og:title" content="RÖDA GRÄNSER Ebook">
+    <meta property="og:description" content="En roman om krig, brödraskap – och det som finns kvar när allt annat rasat.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dinwebbplats.se">
+    <meta property="og:image" content="https://dinwebbplats.se/cover.jpg">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 id="Hd">RÖDA GRÄNSER Ebook</h1>
-
+    <button id="darkModeToggle" title="Växla mörkt/ljust läge" aria-label="Växla mörkt/ljust läge">🌙</button>
+    <h1 id="Hd" tabindex="0">RÖDA GRÄNSER Ebook</h1>
+    <div class="progress-bar-container" aria-label="Läsprogress">
+        <div class="progress-bar" id="progressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
     <div id="desc">
         <h2>Röda gränser</h2>
         <button type="button" id="toggleDesc" class="toggle-btn">Visa beskrivning</button>
         <div id="descContent" class="desc-content hidden">
-            <p><em>En roman om krig, brödraskap – och det som finns kvar när allt annat rasat.</em></p>
-            
-            <p>När ett blixtanfall slår mot Sverige och Finland förändras allt. För besättningen i stridsvagnen Anubis är övergången från övning till verklig front brutal. Genom snötyngda skogar, tysta stadsgator och sönderslitna industriområden kämpar de sig fram – inte bara mot en yttre fiende, utan mot kylan, rädslan och det som långsamt slits sönder inuti.</p>
-            
-            <p>I centrum står Gustav – vagnchef, soldat, son. Hans resa sträcker sig djupt in i barndomens tystnader, genom förlust, skuld och längtan. I vagnen finns också Libbe, skytten som växer in i rollen som krigare på hemmaplan. Tompa, laddaren med nerver av stål men ett hjärta som skaver. Simpan, föraren som säger lite men ser allt.</p>
-            
-            <p>Tillsammans bär de maskinen, men också varandra.</p>
-            
-            <p>Med lågmäld realism, tryckande närvaro och bultande mänsklighet berättar Röda gränser om en generation som aldrig trodde de skulle behöva slåss – men som gör det ändå. Inte för ära. Inte för ideologi. Utan för varandra.</p>
-            
+            <p>Röda gränser är en fängslande roman som tar med läsaren på en intensiv resa genom krigets fasor, brödraskapets styrka och överlevnadens utmaningar. Berättelsen följer huvudkaraktären, vars liv förändras för alltid när han dras in i en konflikt som hotar att förstöra allt han håller kärt.</p>
+            <p>I en värld där lojalitet och mod sätts på prov, tvingas han att konfrontera sina egna inre demoner samtidigt som han kämpar för att överleva i en ogästvänlig och brutal verklighet. Röda gränser är en gripande berättelse om hur långt en människa är beredd att gå för dem man älskar, och vilka gränser som egentligen finns för vår överlevnad.</p>
         </div>
     </div>
-    <div id="share">
+    <div id="share" aria-label="Dela sidan">
         <span>Dela:</span>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://dinwebbplats.se" target="_blank">Facebook</a> |
-        <a href="https://twitter.com/intent/tweet?url=https://dinwebbplats.se&text=Kolla%20in%20denna%20e-bok!" target="_blank">Twitter</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://dinwebbplats.se" target="_blank" rel="noopener" aria-label="Dela på Facebook">Facebook</a> |
+        <a href="https://twitter.com/intent/tweet?url=https://dinwebbplats.se&text=Kolla%20in%20denna%20e-bok!" target="_blank" rel="noopener" aria-label="Dela på Twitter">Twitter</a> |
+        <a href="mailto:?subject=Röda%20gränser%20Ebook&body=Kolla%20in%20denna%20e-bok!%20https://dinwebbplats.se" aria-label="Dela via e-post">E-post</a> |
+        <a href="https://wa.me/?text=Kolla%20in%20denna%20e-bok!%20https://dinwebbplats.se" target="_blank" rel="noopener" aria-label="Dela på WhatsApp">WhatsApp</a> |
+        <button id="copyLinkBtn" aria-label="Kopiera länk">Kopiera länk</button>
     </div>
-
-
     <div id="kap">
         <h3>Nedan har du länk till alla kapitel</h3>
         
@@ -73,10 +76,11 @@
                 </div>
             </div>
         </div>
-        
-
     </div>
-
+    <div id="loading-indicator" role="status" aria-live="polite">
+        <div class="spinner"></div>
+        <div>Laddar kapiteldata...</div>
+    </div>
 
     <div id="popup" class="popup">  <!-- Lägg till ID -->
         <div class="popup-content">  <!-- Fixa klassnamnet -->
@@ -92,12 +96,12 @@
         <div class="chapter-text"></div>
     </div>
 
-    <footer class="contact-footer">
+    <footer class="contact-footer" aria-label="Kontaktinformation">
         <div id="contact">
             <strong>Kontakt:</strong> <a href="mailto:engstrom.nathaniel@gmail.com">engstrom.nathaniel@gmail.com</a>
-            <br> <strong>Wattpad: </strong><a href="https://www.wattpad.com/story/393401513-r%C3%B6da-gr%C3%A4nser" target="_blank">Röda gränsen</a>
+            <br> <strong>Wattpad: </strong><a href="https://www.wattpad.com/story/393401513-r%C3%B6da-gr%C3%A4nser" target="_blank" rel="noopener">Röda gränsen</a>
         </div>
-        <button id="resetProgress" class="reset-btn">Återställ läshistorik</button>
+        <button id="resetProgress" class="reset-btn" aria-label="Återställ läshistorik">Återställ läshistorik</button>
     </footer>
     <script src="script.js"></script>
 </body>

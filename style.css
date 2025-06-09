@@ -1,6 +1,6 @@
 /* === 1. GRUNDLÄGGANDE SIDLAYOUT === */
-body{
-    background-color: #a9a9a9;
+body {
+    background: linear-gradient(135deg, #e8f5e9 0%, #43a047 100%);
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
@@ -9,27 +9,40 @@ body{
     justify-content: center;
     flex-direction: column;
     overflow: visible; /* Allow tooltip to overflow */
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
-#Hd{
+#Hd {
     text-align: center;
+    margin-top: 36px;
+    margin-bottom: 18px;
+    font-size: 2.4em;
+    letter-spacing: 2.5px;
+    color: #205c2a;
+    text-shadow: 0 2px 12px rgba(67,160,71,0.10);
 }
 
 /* === 2. BESKRIVNINGSSEKTION === */
 #desc {
     max-width: 800px;
     margin: 40px auto;
-    padding: 30px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 8px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    padding: 36px 32px 32px 32px;
+    background: rgba(240,255,240,0.99);
+    border: 1.5px solid #a5d6a7;
+    box-shadow: 0 6px 32px rgba(67,160,71,0.10);
+    border-radius: 14px;
+    margin-top: 0;
+    margin-bottom: 24px;
 }
 
 #desc h2 {
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 1.8em;
+    color: #205c2a;
+    font-size: 2em;
+    margin-bottom: 18px;
     text-align: center;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 #desc p {
@@ -52,25 +65,34 @@ body{
 
 #descContent {  /* Changed from #content */
     transition: all 0.3s ease-in-out;
+    border-left: 5px solid #43a047;
+    padding-left: 22px;
+    background: rgba(220,255,220,0.85);
+    border-radius: 6px;
+    margin-top: 12px;
 }
 
 /* === 3. KAPITELSEKTION === */
 #kap {
     width: 50%;
-    border-radius: 10px;
-    background-color: aliceblue;
-    padding: 1px;
+    border-radius: 14px;
+    background: linear-gradient(120deg, #e8f5e9 0%, #a5d6a7 100%);
+    border: 1.5px solid #a5d6a7;
+    box-shadow: 0 4px 18px rgba(67,160,71,0.08);
+    margin-bottom: 36px;
+    padding: 16px 0 24px 0;
     text-align: center;
     justify-content: center;
 }
 
-#kap h3{
-    font-size: 20px;
-    color: #333;
-    border-bottom: 3px solid #000000;
+#kap h3 {
+    font-size: 1.18em;
+    color: #205c2a;
+    border-bottom: 3px solid #388e3c;
+    margin-bottom: 12px;
     display: inline-block;
 }
-#Kaplist{
+#Kaplist {
     display: flex;
     flex-direction: column;
     padding: 5px;
@@ -103,24 +125,28 @@ body{
 /* === 5. KAPITELKNAPPAR === */
 .kapitel-link { 
     display: inline-block;
-    padding: 10px 20px;
-    background-color: #f0f0f0;
-    border: 2px solid #00ff3c;
-    border-radius: 5px;
-    color: #333;
+    padding: 12px 24px;
+    background: #e8f5e9;
+    border-radius: 10px;
+    font-size: 1.12em;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(67,160,71,0.06);
+    border: 2.5px solid #43a047;
+    color: #205c2a;
     text-decoration: none;
-    margin: 5px;
-    min-width: 120px;
+    margin: 7px;
+    min-width: 130px;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: all 0.18s cubic-bezier(.4,2,.6,1);
     cursor: pointer;
 }
 
-.kapitel-link:hover {
-    background-color: #d2cece;
-    color: rgb(0, 0, 0) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+.kapitel-link:hover, .kapitel-link:focus {
+    background: #c8e6c9;
+    color: #1b5e20 !important;
+    border-color: #388e3c;
+    box-shadow: 0 4px 16px rgba(67,160,71,0.13);
+    transform: translateY(-2px) scale(1.04);
 }
 
 .kapitel-link .kapitel-idle {
@@ -138,34 +164,19 @@ body{
 }
 
 .chapter-unread {
-    border-color: #00ff3c !important;
-    background-color: #f0f0f0;
+    background: #e8f5e9 !important;
+    border-color: #43a047 !important;
+    color: #205c2a !important;
 }
 .chapter-reading {
-    border-color: #ffb300 !important;
-    background-color: #fffbe6;
-    position: relative;
-}
-.chapter-reading::after {
-    content: "⏳";
-    position: absolute;
-    top: 2px;
-    right: 5px;
-    font-size: 0.9em;
-    color: #ffb300;
+    background: #f1f8e9 !important;
+    border-color: #cddc39 !important;
+    color: #33691e !important;
 }
 .chapter-read {
-    border-color: #666 !important;
-    background-color: #e0e0e0;
-    position: relative;
-}
-.chapter-read::after {
-    content: "✓";
-    position: absolute;
-    top: 2px;
-    right: 5px;
-    font-size: 0.8em;
-    color: #666;
+    background: #c8e6c9 !important;
+    border-color: #81c784 !important;
+    color: #388e3c !important;
 }
 
 /* === 6. TOOLTIP SYSTEM === */
@@ -182,12 +193,13 @@ body{
 }
 
 .chapter-tooltip {
-    background: #222;
+    background: #205c2a;
     color: #fff;
-    padding: 12px 24px;
-    border-radius: 6px;
-    font-size: 1.05em;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(67,160,71,0.18);
+    font-size: 1.12em;
+    padding: 16px 32px;
+    border: 1.5px solid #43a047;
     opacity: 0;
     transition: all 0.2s ease;
     min-height: 2.5em;
@@ -266,18 +278,21 @@ a:link{
 /* === RESET KNAPP STILAR === */
 .reset-btn {
     margin-top: 10px;
-    padding: 8px 16px;
-    background: #ff4444;
+    padding: 12px 28px;
+    background: linear-gradient(90deg, #43a047 0%, #8bc34a 100%);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 22px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background 0.18s, color 0.18s;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(67,160,71,0.08);
 }
 
 .reset-btn:hover {
-    background: #cc0000;
-    transform: translateY(-1px);
+    background: #388e3c !important;
+    color: #fff !important;
 }
 
 /* === KAPITELVISNING === */
@@ -285,10 +300,10 @@ a:link{
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    padding: 28px 24px 24px 24px;
+    background: rgba(240,255,240,0.99);
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(67,160,71,0.10);
     transition: opacity 0.3s ease;
     opacity: 1;
 }
@@ -300,12 +315,15 @@ a:link{
 
 .back-to-list {
     margin-bottom: 20px;
-    padding: 8px 16px;
+    padding: 12px 28px;
     background: #333;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 22px;
     cursor: pointer;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(67,160,71,0.08);
 }
 
 /* Popup */
@@ -324,59 +342,244 @@ a:link{
 }
 
 .popup-content {  /* Fixa klassnamnet */
-    color: #000;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    max-width: 300px;
-    text-align: center;
+    background: #e8f5e9;
+    color: #205c2a;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(67,160,71,0.16);
+    border: 1.5px solid #b2dfdb;
+    font-size: 1.12em;
+    padding: 22px 18px;
 }
 
-#desc, #share, #kap, .contact-footer {
-    transition: opacity 0.3s ease;
+.popup .popup-close {
+    background: #43a047;
+    color: #fff;
+    border: none;
+    border-radius: 18px;
+    padding: 7px 18px;
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.18s;
+}
+.popup .popup-close:hover {
+    background: #388e3c;
 }
 
-.chapter-content {
-    line-height: 1.8;
-    font-size: 1.1em;
-    padding: 20px;
-    max-width: 700px;
-    margin: 0 auto;
-    position: relative;
-    /* För exakt highlight */
+/* === PROGRESSBAR === */
+.progress-bar-container {
+    background: #e8f5e9;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(67,160,71,0.08);
+    margin-bottom: 28px;
+    margin-top: 0;
+    height: 20px;
+    max-width: 800px;
+    width: 100%;
+    overflow: hidden;
 }
-.chapter-line {
-    position: relative;
-    min-height: 1.5em;
-    padding: 0 2px;
-    z-index: 1;
-    background: transparent;
-    /* Gör varje rad till ett block för exakt highlight */
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #43a047 0%, #8bc34a 100%);
+    width: 0%;
+    transition: width 0.5s;
+    border-radius: 12px;
 }
-.chapter-line.bookmark-highlight-line {
-    background: #fffbe6;
-    border-left: 4px solid #ffb300;
-    transition: background 0.3s;
-}
-/* === 9. BOKMÄRKEN === */
-.bookmark-highlight {
-    background: rgba(255,230,0,0.45);
-    border-top: 2px solid #ffb300;
-    border-bottom: 2px solid #ffb300;
-    height: 30px;
-    left: 0;
-    right: 0;
-    position: absolute;
-    z-index: 10;
-    pointer-events: none;
+
+/* === LADDNINGSINDIKATOR === */
+#loading-indicator {
     display: none;
-    transition: opacity 0.3s;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    background: rgba(255,255,255,0.95);
+    padding: 32px 48px;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    font-size: 1.2em;
+    color: #333;
+    text-align: center;
+    margin-top: 0;
+}
+#loading-indicator.active {
+    display: block;
+}
+#loading-indicator .spinner {
+    border: 4px solid #eee;
+    border-top: 4px solid #00bfff;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 12px auto;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
 }
 
-.kapitel-link.chapter-disabled {
-    pointer-events: none;
-    opacity: 0.5;
-    filter: grayscale(0.7);
-    cursor: not-allowed;
+/* === MÖRKT LÄGE === */
+body.dark-mode,
+body.dark-mode * {
+    color: #e8f5e9 !important;
+    border-color: #33691e !important;
+}
+
+body.dark-mode {
+    background: linear-gradient(135deg, #1b5e20 0%, #263238 100%) !important;
+}
+
+body.dark-mode #desc,
+body.dark-mode .chapter-container,
+body.dark-mode .popup-content,
+body.dark-mode .chapter-content,
+body.dark-mode .chapter-line,
+body.dark-mode .desc-content {
+    background: #263238 !important;
+    color: #e8f5e9 !important;
+    border-color: #33691e !important;
+}
+
+body.dark-mode .chapter-tooltip {
+    background: #205c2a !important;
+    color: #fff !important;
+    border: 1.5px solid #43a047 !important;
+}
+
+body.dark-mode .progress-bar-container {
+    background: #205c2a !important;
+}
+
+body.dark-mode .popup-content {
+    background: #263238 !important;
+    color: #e8f5e9 !important;
+    border: 1.5px solid #33691e !important;
+}
+
+body.dark-mode .kapitel-link {
+    background: #205c2a !important;
+    color: #e8f5e9 !important;
+    border-color: #43a047 !important;
+    box-shadow: 0 2px 8px rgba(67,160,71,0.08);
+}
+
+body.dark-mode .kapitel-link.chapter-read {
+    background: #388e3c !important;
+    border-color: #81c784 !important;
+    color: #b2dfdb !important;
+}
+body.dark-mode .kapitel-link.chapter-reading {
+    background: #33691e !important;
+    border-color: #cddc39 !important;
+    color: #fff !important;
+}
+body.dark-mode .reset-btn,
+body.dark-mode .back-to-list {
+    background: linear-gradient(90deg, #33691e 0%, #43a047 100%) !important;
+    color: #fff !important;
+}
+body.dark-mode .reset-btn:hover,
+body.dark-mode .back-to-list:hover {
+    background: #388e3c !important;
+    color: #fff !important;
+}
+body.dark-mode #copyLinkBtn {
+    background: #33691e !important;
+    color: #fff !important;
+}
+body.dark-mode #copyLinkBtn:hover {
+    background: #388e3c !important;
+    color: #fff !important;
+}
+body.dark-mode #darkModeToggle {
+    background: linear-gradient(90deg, #205c2a 0%, #388e3c 100%) !important;
+    color: #fff !important;
+}
+body.dark-mode .popup .popup-close {
+    background: #388e3c !important;
+    color: #fff !important;
+}
+
+/* === RESPONSIVITET === */
+@media (max-width: 900px) {
+    #kap, .chapter-container, #desc {
+        width: 95% !important;
+        max-width: 100% !important;
+        padding: 10px !important;
+    }
+    .kapitel-columns {
+        flex-direction: column;
+        gap: 0;
+        max-width: 100%;
+    }
+    .kapitel-column {
+        width: 100%;
+        padding-bottom: 0;
+    }
+    #Kaplist {
+        width: 100%;
+    }
+}
+@media (max-width: 600px) {
+    body {
+        padding: 2px;
+    }
+    #Hd {
+        font-size: 1.2em;
+    }
+    .chapter-content {
+        font-size: 1em;
+        padding: 6px;
+    }
+}
+
+/* === TILLGÄNGLIGHET === */
+:focus {
+    outline: 2px solid #00bfff;
+    outline-offset: 2px;
+}
+.kapitel-link:focus {
+    background: #d2cece;
+    color: #000;
+}
+
+/* === KOPIERA LÄNK KNAPP === */
+#copyLinkBtn {
+    background: #43a047;
+    color: #fff;
+    padding: 10px 22px;
+    margin-left: 8px;
+    font-size: 1em;
+    transition: background 0.18s;
+    border-radius: 22px;
+}
+
+#copyLinkBtn:hover {
+    background: #388e3c;
+    color: #fff;
+}
+
+/* === MÖRKT LÄGE TOGGLE KNAPP === */
+#darkModeToggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 10001;
+    background: linear-gradient(90deg, #205c2a 0%, #43a047 100%);
+    color: #fff;
+    border: none;
+    border-radius: 22px;
+    padding: 10px 22px;
+    font-size: 1.18em;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(67,160,71,0.15);
+    transition: background 0.18s;
+}
+
+#darkModeToggle:hover {
+    background: #388e3c;
+    color: #fff;
 }

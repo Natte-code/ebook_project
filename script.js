@@ -187,6 +187,7 @@ function updateChapterStatus(currentOpenChapterNum = null) {
             link.classList.add('chapter-unread');
         }
     });
+    updateProgressBar(); // Lägg till denna rad om den saknas
 }
 
 // Add click handler to mark chapters as reading (endast om kapitel finns)
@@ -220,12 +221,15 @@ function resetAllCookies() {
     deleteCookie('chapterBookmarks');
     deleteCookie('chapterNotes');
     deleteCookie('chapterStatus');
+    deleteCookie('chapterSessionStatus'); // Viktigt: nollställ även sessionstatus
     // Rensa visuellt
     document.querySelectorAll('.chapter-read, .chapter-reading, .chapter-unread').forEach(chapter => {
         chapter.classList.remove('chapter-read', 'chapter-reading', 'chapter-unread');
     });
     showPopup('All läshistorik, bokmärken och noteringar har återställts!');
     updateChapterStatus();
+    updateManualChapterStatus();
+    updateProgressBar(); // Säkerställ att progressbar alltid nollställs
 }
 
 document.getElementById('resetProgress').addEventListener('click', () => {
@@ -243,8 +247,11 @@ const closeBtn = popup.querySelector(".popup-close"); // Lägg till denna rad
 closeBtn.addEventListener("click", hidePopup);
 
 function showPopup(text){
-    message.textContent = text
-    popup.classList.add("show")
+    message.textContent = text;
+    popup.classList.add("show");
+    popup.setAttribute('aria-live', 'assertive');
+    // Visa popup längre om det är viktigt
+    setTimeout(() => popup.classList.remove("show"), text.includes("återställts") ? 5000 : 3500);
 }
 
 function hidePopup(){
@@ -278,21 +285,91 @@ function showListView() {
     chapterContent.classList.add('hidden');
 }
 
-// Ladda in alla kapitel från chapters.json vid sidladdning
+// === LADDNINGSINDIKATOR ===
+const loadingIndicator = document.getElementById('loading-indicator');
+function showLoading() {
+    loadingIndicator.classList.add('active');
+}
+function hideLoading() {
+    loadingIndicator.classList.remove('active');
+}
+
+// === MÖRKT LÄGE ===
+const darkModeToggle = document.getElementById('darkModeToggle');
+function setDarkMode(on, updateIcon = true) {
+    if (on) {
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('darkMode', '1');
+        if (updateIcon) darkModeToggle.textContent = '☀️';
+    } else {
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('darkMode', '0');
+        if (updateIcon) darkModeToggle.textContent = '🌙';
+    }
+}
+
+// Initiera dark mode korrekt vid sidladdning
+(function() {
+    const darkPref = localStorage.getItem('darkMode');
+    if (darkPref === '1') {
+        setDarkMode(true, true);
+    } else {
+        setDarkMode(false, true);
+    }
+})();
+
+darkModeToggle.addEventListener('click', () => {
+    const isDark = document.body.classList.contains('dark-mode');
+    setDarkMode(!isDark, true);
+});
+
+// === PROGRESSBAR ===
+function updateProgressBar() {
+    const progressBar = document.getElementById('progressBar');
+    const total = document.querySelectorAll('.kapitel-link').length;
+    let read = 0;
+    try {
+        const session = getChapterSessionStatus();
+        for (const k in session) if (session[k] === "read") read++;
+    } catch {}
+    progressBar.style.width = total ? (100 * read / total) + '%' : '0%';
+}
+window.updateProgressBar = updateProgressBar;
+
+// === KAPITELBESKRIVNING I KAPITELVY ===
+function setChapterDescription(num) {
+    const descDiv = document.querySelector('.chapter-description');
+    let desc = '';
+    if (typeof allChapters === 'object' && allChapters[num] && allChapters[num].title) {
+        desc = allChapters[num].title;
+    } else {
+        // Fallback till data-chapter-title
+        const link = document.querySelector(`.kapitel-link[data-chapter="${num}"]`);
+        desc = link ? link.getAttribute('data-chapter-title') : '';
+    }
+    descDiv.textContent = desc ? desc : '';
+}
+
+// === Ladda kapiteldata med indikator ===
 let allChapters = {};
 let chaptersLoaded = false;
+showLoading();
 fetch('chapters/chapters.json')
     .then(res => res.json())
     .then(data => {
         allChapters = data.chapters || {};
         chaptersLoaded = true;
+        hideLoading();
         updateManualChapterStatus();
+        updateProgressBar();
     })
     .catch(() => {
         showPopup('Kunde inte ladda kapiteldata. Kontrollera din internetanslutning eller filen chapters.json.');
         allChapters = {};
         chaptersLoaded = false;
+        hideLoading();
         updateManualChapterStatus();
+        updateProgressBar();
     });
 
 // Vänta tills kapiteldata är laddad innan klick fungerar
@@ -369,7 +446,7 @@ function isChapterAvailable(chapterNum) {
     return false;
 }
 
-// Modifiera loadChapter så att den visar/döljer rätt sektioner
+// Modifiera loadChapter så att den visar kapitelbeskrivning och progressbar
 async function loadChapter(num) {
     try {
         // Failsafe: Kontrollera kapiteldata
@@ -384,6 +461,7 @@ async function loadChapter(num) {
         }
 
         showChapterView();
+        setChapterDescription(num);
 
         // Hämta alltid senaste bokmärkesdata
         let bookmarkObj = getBookmark(num);
@@ -552,6 +630,7 @@ async function loadChapter(num) {
         };
 
         updateManualChapterStatus();
+        updateProgressBar();
         history.pushState({chapter: num}, '', `#kapitel-${num}`);
     } catch (error) {
         console.error('Failed to load chapter:', error);
@@ -621,7 +700,25 @@ function updateManualChapterStatus(currentOpenChapterNum = null) {
             link.classList.add('chapter-unread');
         }
     });
+    updateProgressBar();
 }
 
 // Initialize chapter status on page load
 updateManualChapterStatus();
+
+// === KOPIERA LÄNK TILL URKLIPP ===
+const copyLinkBtn = document.getElementById('copyLinkBtn');
+if (copyLinkBtn) {
+    copyLinkBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(window.location.href)
+            .then(() => showPopup('Länk kopierad!'))
+            .catch(() => showPopup('Kunde inte kopiera länk.'));
+    });
+}
+
+// === FÖRBÄTTRAD TANGENTBORDSNAVIGERING ===
+document.addEventListener('keydown', function(e) {
+    if (e.key === "Escape") {
+        showListView();
+    }
+});
