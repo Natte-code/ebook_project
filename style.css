@@ -137,12 +137,28 @@ body{
     height: 100%;
 }
 
+.chapter-unread {
+    border-color: #00ff3c !important;
+    background-color: #f0f0f0;
+}
+.chapter-reading {
+    border-color: #ffb300 !important;
+    background-color: #fffbe6;
+    position: relative;
+}
+.chapter-reading::after {
+    content: "⏳";
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    font-size: 0.9em;
+    color: #ffb300;
+}
 .chapter-read {
     border-color: #666 !important;
     background-color: #e0e0e0;
     position: relative;
 }
-
 .chapter-read::after {
     content: "✓";
     position: absolute;
@@ -262,4 +278,105 @@ a:link{
 .reset-btn:hover {
     background: #cc0000;
     transform: translateY(-1px);
+}
+
+/* === KAPITELVISNING === */
+.chapter-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    transition: opacity 0.3s ease;
+    opacity: 1;
+}
+
+.chapter-container.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.back-to-list {
+    margin-bottom: 20px;
+    padding: 8px 16px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Popup */
+.popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease; /* Lägg till transition */
+}
+
+.popup.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup-content {  /* Fixa klassnamnet */
+    color: #000;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 300px;
+    text-align: center;
+}
+
+#desc, #share, #kap, .contact-footer {
+    transition: opacity 0.3s ease;
+}
+
+.chapter-content {
+    line-height: 1.8;
+    font-size: 1.1em;
+    padding: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    /* För exakt highlight */
+}
+.chapter-line {
+    position: relative;
+    min-height: 1.5em;
+    padding: 0 2px;
+    z-index: 1;
+    background: transparent;
+    /* Gör varje rad till ett block för exakt highlight */
+}
+.chapter-line.bookmark-highlight-line {
+    background: #fffbe6;
+    border-left: 4px solid #ffb300;
+    transition: background 0.3s;
+}
+/* === 9. BOKMÄRKEN === */
+.bookmark-highlight {
+    background: rgba(255,230,0,0.45);
+    border-top: 2px solid #ffb300;
+    border-bottom: 2px solid #ffb300;
+    height: 30px;
+    left: 0;
+    right: 0;
+    position: absolute;
+    z-index: 10;
+    pointer-events: none;
+    display: none;
+    transition: opacity 0.3s;
+}
+
+.kapitel-link.chapter-disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    filter: grayscale(0.7);
+    cursor: not-allowed;
 }

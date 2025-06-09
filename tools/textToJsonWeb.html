@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <title>Text till JSON (webbverktyg)</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        textarea { width: 100%; height: 200px; }
+        pre { background: #eee; padding: 10px; }
+        .chapter-list { margin-top: 30px; }
+        .chapter-list textarea { height: 100px; }
+    </style>
+</head>
+<body>
+    <h2>Text till JSON (webbverktyg)</h2>
+    <p>Klista in ett kapitel (första raden = titel, resten = innehåll):</p>
+    <textarea id="input"></textarea><br>
+    <label>
+        Kapitelnummer:
+        <input type="number" id="chapterNum" min="1" value="1" style="width:60px;">
+    </label>
+    <button onclick="convert()">Konvertera till JSON</button>
+    <h3>Resultat (enskilt kapitel):</h3>
+    <pre id="output"></pre>
+
+    <div class="chapter-list">
+        <h3>Bygg hela chapters.json</h3>
+        <p>Klistra in flera kapitel-JSON (en per rad):</p>
+        <textarea id="allChapters"></textarea><br>
+        <button onclick="buildChaptersJson()">Bygg chapters.json</button>
+        <h4>Resultat (chapters.json):</h4>
+        <pre id="chaptersOutput"></pre>
+    </div>
+
+    <script>
+        function convert() {
+            const text = document.getElementById('input').value;
+            const lines = text.split('\n');
+            const title = lines[0] || '';
+            const content = lines.slice(1).join('\n');
+            const wordCount = content.trim().split(/\s+/).filter(Boolean).length;
+            const chapterNum = document.getElementById('chapterNum').value || "1";
+            const json = `"${chapterNum}": ${JSON.stringify({title, content, wordCount}, null, 2)}`;
+            document.getElementById('output').textContent = json;
+        }
+
+        function buildChaptersJson() {
+            const lines = document.getElementById('allChapters').value.split('\n').filter(Boolean);
+            let chapters = {};
+            lines.forEach(line => {
+                // line should be like: "1": { ... }
+                const idx = line.indexOf(':');
+                if (idx > 0) {
+                    const key = line.slice(0, idx).replace(/"/g, '').trim();
+                    const obj = JSON.parse(line.slice(idx + 1));
+                    chapters[key] = obj;
+                }
+            });
+            const result = JSON.stringify({chapters}, null, 2);
+            document.getElementById('chaptersOutput').textContent = result;
+        }
+    </script>
+</body>
+</html>
