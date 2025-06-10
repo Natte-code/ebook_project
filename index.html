@@ -12,6 +12,10 @@
     <meta property="og:image" content="https://dinwebbplats.se/cover.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta name="author" content="Nathaniel Engström">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://dinwebbplats.se">
 </head>
 <body>
     <button id="darkModeToggle" title="Växla mörkt/ljust läge" aria-label="Växla mörkt/ljust läge">🌙</button>
@@ -36,8 +40,8 @@
         <button id="copyLinkBtn" aria-label="Kopiera länk">Kopiera länk</button>
     </div>
     <div id="kap">
-        <h3>Nedan har du länk till alla kapitel</h3>
-        
+        <h3>Nedan har du alla kapitel</h3>
+        <input type="search" id="chapterSearchInput" placeholder="Sök kapitel..." style="margin: 10px 0 18px 0; padding: 8px 16px; border-radius: 6px; border: 1px solid #bbb; font-size: 1em; width: 90%; max-width: 400px; display: block; margin-left: auto; margin-right: auto;">
         <div id="Kaplist">
             <div class="kapitel-columns">
                 <div class="kapitel-column">
@@ -101,7 +105,8 @@
             <strong>Kontakt:</strong> <a href="mailto:engstrom.nathaniel@gmail.com">engstrom.nathaniel@gmail.com</a>
             <br> <strong>Wattpad: </strong><a href="https://www.wattpad.com/story/393401513-r%C3%B6da-gr%C3%A4nser" target="_blank" rel="noopener">Röda gränsen</a>
         </div>
-        <button id="resetProgress" class="reset-btn" aria-label="Återställ läshistorik">Återställ läshistorik</button>
+        <button id="resetProgress" class="reset-btn" aria-label="Återställ läshistorik">Ta bort kakor OCH ränsa all sparad DATA</button>
+        <!-- Statistik-knapp läggs till automatiskt av script.js -->
     </footer>
     <script src="script.js"></script>
 </body>

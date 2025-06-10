@@ -182,9 +182,9 @@ body {
 /* === 6. TOOLTIP SYSTEM === */
 #tooltip-overlay {
     position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 48px;
+    top: 10%; /* Adjusted for better responsiveness */
+    right: 10px;
+    transform: translateY(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -193,13 +193,10 @@ body {
 }
 
 .chapter-tooltip {
-    background: #205c2a;
-    color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 24px rgba(67,160,71,0.18);
-    font-size: 1.12em;
-    padding: 16px 32px;
-    border: 1.5px solid #43a047;
+    /* Standard (ljust tema) */
+    background: #205c2a !important;
+    color: #fff !important;
+    border: 1.5px solid #43a047 !important;
     opacity: 0;
     transition: all 0.2s ease;
     min-height: 2.5em;
@@ -209,6 +206,9 @@ body {
     align-items: center;
     justify-content: center;
     pointer-events: none;
+    padding: 12px 24px; /* Add padding */
+    font-size: 1.1em; /* Increase font size */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Add box-shadow */
 }
 
 .tooltip-visible {
@@ -367,6 +367,28 @@ a:link{
     background: #388e3c;
 }
 
+/* Popup och tooltip extra kontrast för alla teman */
+.popup-content, .chapter-tooltip {
+    font-weight: 600;
+    text-shadow: none;
+    letter-spacing: 0.02em;
+}
+
+/* Knappar och länkar: alltid tydlig kontrast */
+.reset-btn, .back-to-list, #darkModeToggle, #copyLinkBtn {
+    font-weight: 700;
+    border: none;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* Kapitel-länkar: extra padding för bättre läsbarhet */
+.kapitel-link {
+    font-size: 1.13em;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
 /* === PROGRESSBAR === */
 .progress-bar-container {
     background: #e8f5e9;
@@ -443,12 +465,6 @@ body.dark-mode .desc-content {
     border-color: #33691e !important;
 }
 
-body.dark-mode .chapter-tooltip {
-    background: #205c2a !important;
-    color: #fff !important;
-    border: 1.5px solid #43a047 !important;
-}
-
 body.dark-mode .progress-bar-container {
     background: #205c2a !important;
 }
@@ -490,7 +506,7 @@ body.dark-mode #copyLinkBtn {
     background: #33691e !important;
     color: #fff !important;
 }
-body.dark-mode #copyLinkBtn:hover {
+body.darkMode #copyLinkBtn:hover {
     background: #388e3c !important;
     color: #fff !important;
 }
@@ -503,12 +519,179 @@ body.dark-mode .popup .popup-close {
     color: #fff !important;
 }
 
+/* === SEPIA-TEMA === */
+body.sepia-mode, body.sepia-mode * {
+    background: #f5ecd7 !important;
+    color: #4e3b1f !important;
+    border-color: #bfa76a !important;
+}
+body.sepia-mode #desc,
+body.sepia-mode .chapter-container,
+body.sepia-mode .popup-content,
+body.sepia-mode .chapter-content,
+body.sepia-mode .chapter-line,
+body.sepia-mode .desc-content {
+    background: #f5ecd7 !important;
+    color: #4e3b1f !important;
+    border-color: #bfa76a !important;
+}
+body.sepia-mode .progress-bar-container {
+    background: #bfa76a !important;
+}
+body.sepia-mode .progress-bar {
+    background: linear-gradient(90deg, #bfa76a 0%, #e0cfa9 100%) !important;
+}
+body.sepia-mode .kapitel-link {
+    background: #f5ecd7 !important;
+    color: #4e3b1f !important;
+    border-color: #bfa76a !important;
+}
+body.sepia-mode .kapitel-link.chapter-read {
+    background: #e0cfa9 !important;
+    color: #4e3b1f !important;
+}
+body.sepia-mode .kapitel-link.chapter-reading {
+    background: #f5e6c7 !important;
+    color: #4e3b1f !important;
+}
+body.sepia-mode .reset-btn, body.sepia-mode .back-to-list, body.sepia-mode #darkModeToggle, body.sepia-mode #copyLinkBtn {
+    background: linear-gradient(90deg, #bfa76a 0%, #e0cfa9 100%) !important;
+    color: #4e3b1f !important;
+    border: 1.5px solid #bfa76a !important;
+}
+body.sepia-mode .reset-btn:hover,
+body.sepia-mode .back-to-list:hover,
+body.sepia-mode #darkModeToggle:hover,
+body.sepia-mode #copyLinkBtn:hover {
+    background: #a67c00 !important;
+    color: #fff !important;
+}
+body.sepia-mode .popup .popup-close {
+    background: #bfa76a !important;
+    color: #fff !important;
+}
+
+/* === BLÅTT TEMA === */
+body.blue-mode, body.blue-mode * {
+    background: #e3f2fd !important;
+    color: #0d223a !important;
+    border-color: #1976d2 !important;
+}
+body.blue-mode #desc,
+body.blue-mode .chapter-container,
+body.blue-mode .popup-content,
+body.blue-mode .chapter-content,
+body.blue-mode .chapter-line,
+body.blue-mode .desc-content {
+    background: #e3f2fd !important;
+    color: #0d223a !important;
+    border-color: #1976d2 !important;
+}
+body.blue-mode .progress-bar-container {
+    background: #1976d2 !important;
+}
+body.blue-mode .progress-bar {
+    background: linear-gradient(90deg, #1976d2 0%, #90caf9 100%) !important;
+}
+body.blue-mode .kapitel-link {
+    background: #bbdefb !important;
+    color: #0d223a !important;
+    border-color: #1976d2 !important;
+}
+body.blue-mode .kapitel-link.chapter-read {
+    background: #90caf9 !important;
+    color: #0d223a !important;
+}
+body.blue-mode .kapitel-link.chapter-reading {
+    background: #e1f5fe !important;
+    color: #0d223a !important;
+}
+body.blue-mode .reset-btn, body.blue-mode .back-to-list, body.blue-mode #darkModeToggle, body.blue-mode #copyLinkBtn {
+    background: linear-gradient(90deg, #1976d2 0%, #90caf9 100%) !important;
+    color: #fff !important;
+    border: 1.5px solid #1976d2 !important;
+}
+body.blue-mode .reset-btn:hover,
+body.blue-mode .back-to-list:hover,
+body.blue-mode #darkModeToggle:hover,
+body.blue-mode #copyLinkBtn:hover {
+    background: #1565c0 !important;
+    color: #fff !important;
+}
+body.blue-mode .popup .popup-close {
+    background: #1976d2 !important;
+    color: #fff !important;
+}
+
+/* === MONO (GRÅSKALA) === */
+body.mono-mode, body.mono-mode * {
+    background: #f4f4f4 !important;
+    color: #222 !important;
+    border-color: #888 !important;
+}
+body.mono-mode #desc,
+body.mono-mode .chapter-container,
+body.mono-mode .popup-content,
+body.mono-mode .chapter-content,
+body.mono-mode .chapter-line,
+body.mono-mode .desc-content {
+    background: #f4f4f4 !important;
+    color: #222 !important;
+    border-color: #888 !important;
+}
+body.mono-mode .progress-bar-container {
+    background: #888 !important;
+}
+body.mono-mode .progress-bar {
+    background: linear-gradient(90deg, #888 0%, #bdbdbd 100%) !important;
+}
+body.mono-mode .kapitel-link {
+    background: #e0e0e0 !important;
+    color: #222 !important;
+    border-color: #888 !important;
+}
+body.mono-mode .kapitel-link.chapter-read {
+    background: #bdbdbd !important;
+    color: #222 !important;
+}
+body.mono-mode .kapitel-link.chapter-reading {
+    background: #eeeeee !important;
+    color: #222 !important;
+}
+body.mono-mode .reset-btn, body.mono-mode .back-to-list, body.mono-mode #darkModeToggle, body.mono-mode #copyLinkBtn {
+    background: #888 !important;
+    color: #fff !important;
+    border: 1.5px solid #888 !important;
+}
+body.mono-mode .reset-btn:hover,
+body.mono-mode .back-to-list:hover,
+body.mono-mode #darkModeToggle:hover,
+body.mono-mode #copyLinkBtn:hover {
+    background: #444 !important;
+    color: #fff !important;
+}
+body.mono-mode .popup .popup-close {
+    background: #888 !important;
+    color: #fff !important;
+}
+
 /* === RESPONSIVITET === */
+@media (max-width: 1200px) {
+    #kap, #desc, .chapter-container {
+        max-width: 98vw !important;
+        width: 98vw !important;
+        padding-left: 2vw !important;
+        padding-right: 2vw !important;
+    }
+    .kapitel-columns {
+        max-width: 98vw;
+    }
+}
 @media (max-width: 900px) {
     #kap, .chapter-container, #desc {
-        width: 95% !important;
-        max-width: 100% !important;
-        padding: 10px !important;
+        width: 99vw !important;
+        max-width: 99vw !important;
+        padding: 8px !important;
     }
     .kapitel-columns {
         flex-direction: column;
@@ -522,17 +705,89 @@ body.dark-mode .popup .popup-close {
     #Kaplist {
         width: 100%;
     }
+    #tooltip-overlay {
+        right: 5px;
+        top: 10%;
+        transform: translateY(-50%);
+    }
+    .chapter-tooltip {
+        font-size: 1em;
+        padding: 10px 14px;
+    }
+    .reset-btn, .back-to-list, #darkModeToggle, #copyLinkBtn {
+        font-size: 0.95em;
+        padding: 10px 16px;
+    }
+}
+@media (max-width: 700px) {
+    #kap, .chapter-container, #desc {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        padding: 4px !important;
+    }
+    .kapitel-columns {
+        gap: 0;
+        padding: 0;
+    }
+    .kapitel-link {
+        min-width: 90px;
+        font-size: 1em;
+        padding: 8px 8px;
+    }
+    #Hd {
+        font-size: 1.1em;
+        padding: 0 2vw;
+    }
+    .reset-btn, .back-to-list, #darkModeToggle, #copyLinkBtn {
+        font-size: 0.9em;
+        padding: 8px 10px;
+    }
 }
 @media (max-width: 600px) {
     body {
-        padding: 2px;
+        padding: 0;
     }
     #Hd {
-        font-size: 1.2em;
+        font-size: 1em;
+        padding: 0 1vw;
     }
     .chapter-content {
-        font-size: 1em;
-        padding: 6px;
+        font-size: 0.95em;
+        padding: 4px;
+    }
+    .chapter-tooltip {
+        font-size: 0.85em;
+        padding: 6px 8px;
+        min-width: 120px;
+        max-width: 90vw;
+        word-break: break-word;
+    }
+    #tooltip-overlay {
+        top: 5%;
+        right: 2px;
+        left: auto;
+        max-width: 96vw;
+    }
+    .reset-btn, .back-to-list, #darkModeToggle, #copyLinkBtn {
+        font-size: 0.85em;
+        padding: 7px 6px;
+    }
+    #Kaplist {
+        padding: 0;
+    }
+}
+@media (max-width: 400px) {
+    #Hd {
+        font-size: 0.9em;
+    }
+    .chapter-tooltip {
+        font-size: 0.75em;
+        padding: 4px 4px;
+    }
+    .kapitel-link {
+        font-size: 0.9em;
+        padding: 6px 4px;
+        min-width: 60px;
     }
 }
 
@@ -544,6 +799,13 @@ body.dark-mode .popup .popup-close {
 .kapitel-link:focus {
     background: #d2cece;
     color: #000;
+}
+
+/* === TILLGÄNGLIGHET: FOKUS PÅ POPUP === */
+.popup:focus,
+.popup .popup-close:focus {
+    outline: 2px solid #00bfff;
+    outline-offset: 2px;
 }
 
 /* === KOPIERA LÄNK KNAPP === */
@@ -583,3 +845,47 @@ body.dark-mode .popup .popup-close {
     background: #388e3c;
     color: #fff;
 }
+
+#chapterSearchInput {
+    margin: 10px 0 18px 0;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+    font-size: 1em;
+    width: 90%;
+    max-width: 400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+/* === TEMA-SPECIFIKA TOOLTIP-FÄRGER (lägg sist i filen) === */
+body.sepia-mode .chapter-tooltip {
+    background: #bfa76a !important;
+    color: #fff !important;
+    border: 1.5px solid #a67c00 !important;
+}
+body.dark-mode .chapter-tooltip {
+    background: #205c2a !important;
+    color: #fff !important;
+    border: 1.5px solid #43a047 !important;
+}
+body.blue-mode .chapter-tooltip {
+    background: #1976d2 !important;
+    color: #fff !important;
+    border: 1.5px solid #1565c0 !important;
+}
+body.mono-mode .chapter-tooltip {
+    background: #888 !important;
+    color: #fff !important;
+    border: 1.5px solid #444 !important;
+}
+
+/* TA BORT eller KOMMENTERA UT ALLA .chapter-tooltip-regler INUTI:
+   body.sepia-mode, body.sepia-mode * { ... }
+   body.dark-mode, body.dark-mode * { ... }
+   body.blue-mode, body.blue-mode * { ... }
+   body.mono-mode, body.mono-mode * { ... }
+   så att endast de ovanstående tema-reglerna gäller för .chapter-tooltip!
+*/
